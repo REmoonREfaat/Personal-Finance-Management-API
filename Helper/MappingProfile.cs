@@ -23,8 +23,7 @@ namespace Personal_Finance_Management_API.Helper
             foreach (Type c in classes)
             {
                 CreateMap(c, c)
-                        .ForMember("CreationDate", act => act.Ignore())
-                        .ForMember("LastUpdatedDate", act => act.Ignore());
+                        .ForMember("ActionDate", act => act.Ignore());
             }
             // map Entity with Model
             CreateMap<Category, CategoryDTO>().ReverseMap();

@@ -15,7 +15,7 @@ namespace Personal_Finance_Management_API.Helper
                 {
                     Timestamp = DateTime.Now,
                     IsError = true,
-                    Result = null,
+                    Items = null,
                     Description = errorMessage
                 };
                 return res;
@@ -26,7 +26,7 @@ namespace Personal_Finance_Management_API.Helper
                 {
                     Timestamp = DateTime.Now,
                     IsError = false,
-                    Result = result,
+                    Items = result,
                 };
                 return res;
             }

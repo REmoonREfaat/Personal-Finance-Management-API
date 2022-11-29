@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common.Models;
+using Core.Entities;
 using Core.Interfaces.Services;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -25,29 +26,24 @@ namespace Personal_Finance_Management_API.Controllers
             _service = service;
             _mapper = mapper;
             _logger = logger;
-        }
-
-   
-
-
+        } 
 
         [HttpGet]
-        public async Task<ResponseModel<List<TransactionDTO>>> Transactions(string TransactionKind , DateTime StartDate, DateTime EndDate, string SortBy , int? Page=1, int? PageSize=10
-            )
+        public async Task<ResponseModel<List<TransactionDTO>>> Transactions( string TransactionKind)
         {
             try
             {
-                var result = await _service.GetAllTransactions();
+                var result = await _service.GetAllTransactions(TransactionKind);
                 var list = _mapper.Map<List<TransactionDTO>>(result.ToList());
                 var responseModel = HelperClass<List<TransactionDTO>>.CreateResponseModel(list, false, "");
                 return responseModel;
-
             }
             catch (Exception ex)
             {
                 _logger.LogError("Error occured CategoryController\\GetAll" + " with EX: " + ex.ToString());
                 return HelperClass<List<TransactionDTO>>.CreateResponseModel(null, true, ex.Message);
             }
+
         }
 
     }
